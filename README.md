@@ -30,6 +30,44 @@ export default defineConfig({
 })
 ```
 
+### Advanced Usage
+
+To replace the development URL address in **manifest.xml** file to production address,
+you can use the plugin configuration option or `.env` files.
+
+```js
+// vite.config.js
+import officeAddin from 'vite-plugin-office-addin'
+
+export default defineConfig({
+  plugins: [officeAddin({
+    devUrl: 'https://localhost:3000',
+    prodUrl: 'https://office-addin.contoso.com'
+  })]
+})
+```
+
+Alternatively, you can use `.env` to replace different addresses for different environments.
+Use the `ADDIN_DEV_URL` and `ADDIN_PROD_URL` environment variables.
+
+```js
+// vite.config.js + .env files
+import officeAddin from 'vite-plugin-office-addin'
+
+export default defineConfig({
+  plugins: [officeAddin()]
+})
+```
+
+```sh
+# .env.production
+ADDIN_DEV_URL=https://localhost:3000
+ADDIN_PROD_URL=https://office-addin.contoso.com
+```
+
+When you run `vite build` the generated **manifest.xml** file will have
+production addresses.
+
 ## License
 
 Licensed under [MIT License](LICENSE).  
