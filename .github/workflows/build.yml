@@ -25,15 +25,16 @@ jobs:
 
     - name: build
       run: |
-        yarn install
+        yarn install --frozen-lockfile
         yarn build
 
     - name: pack
       run: |
-        yarn pack
+        yarn pack --filename=vite-plugin-office-addin.tgz
 
     - name: artifact
       uses: actions/upload-artifact@v2
       with:
+        name: 'vite-plugin-office-addin'
         path: '*.tgz'
         retention-days: 14
