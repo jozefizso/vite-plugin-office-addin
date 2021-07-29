@@ -1,14 +1,42 @@
-import type { Plugin } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
+import { loadEnv } from 'vite'
 const fs = require('fs')
+const path = require('path')
 
-export default function officeManifest() : Plugin {
+export interface Options {
+  devUrl?: string
+  prodUrl?: string
+}
+
+export default function officeManifest(options: Options) : Plugin {
   const manifestFile = 'manifest.xml'
+
+  let viteConfig: ResolvedConfig
+  let env : Record<string, string>
 
   return {
     name: 'office-addin:manifest',
 
+    configResolved (resolvedConfig: ResolvedConfig) {
+      viteConfig = resolvedConfig
+      env = loadEnv(viteConfig.mode, process.cwd(), 'ADDIN')
+    },
+
     generateBundle() {
-      const content = fs.readFileSync(manifestFile, 'utf-8')
+      const manifestPath = path.resolve(viteConfig.root, 'manifest.xml')
+
+      if (!fs.existsSync(manifestPath)) {
+        viteConfig.logger.warn('The manifest.xml file does not exists.')
+        return
+      }
+
+      const devUrl = options?.devUrl || env['ADDIN_DEV_URL']
+      const prodUrl = options?.prodUrl || env['ADDIN_PROD_URL']
+
+      let content = fs.readFileSync(manifestPath, 'utf-8')
+      if (devUrl && devUrl != '') {
+        content = content.replace(new RegExp(devUrl, "g"), prodUrl)
+      }
 
       this.emitFile({
         type: 'asset',
