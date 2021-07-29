@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: node ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+
+    - name: build
+      run: |
+        yarn install --frozen-lockfile
+        yarn build
+
+    - name: pack
+      run: |
+        yarn pack --filename=vite-plugin-office-addin.tgz
+
+    - name: artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'vite-plugin-office-addin'
+        path: '*.tgz'
+        retention-days: 14
