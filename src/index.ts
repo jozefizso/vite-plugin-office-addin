@@ -8,7 +8,7 @@ export interface Options {
   prodUrl?: string
 }
 
-export default function officeManifest(options: Options) : Plugin {
+export default function officeManifest(options?: Options) : Plugin {
   const manifestFile = 'manifest.xml'
 
   let viteConfig: ResolvedConfig
