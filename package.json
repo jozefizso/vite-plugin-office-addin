@@ -30,5 +30,10 @@
     "vite",
     "vite-plugin",
     "office-addin"
-  ]
+  ],
+  "np": {
+    "yarn": true,
+    "tests": false,
+    "message": "vite-plugin-office-addin v%s"
+  }
 }
