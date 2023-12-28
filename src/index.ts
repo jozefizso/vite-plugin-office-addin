@@ -4,12 +4,13 @@ import fs from 'fs'
 import path from 'path'
 
 export interface Options {
+  path?: string
   devUrl?: string
   prodUrl?: string
 }
 
 export default function officeManifest(options?: Options) : Plugin {
-  const manifestFile = 'manifest.xml'
+  const manifestFile = options?.path ?? 'manifest.xml'
 
   let viteConfig: ResolvedConfig
   let env : Record<string, string>
@@ -23,10 +24,10 @@ export default function officeManifest(options?: Options) : Plugin {
     },
 
     generateBundle() {
-      const manifestPath = path.resolve(viteConfig.root, 'manifest.xml')
+      const manifestPath = path.resolve(viteConfig.root, manifestFile)
 
       if (!fs.existsSync(manifestPath)) {
-        viteConfig.logger.warn('The manifest.xml file does not exists.')
+        viteConfig.logger.warn(`The manifest.xml file does not exist at path: '${manifestPath}'`)
         return
       }
 
@@ -40,7 +41,7 @@ export default function officeManifest(options?: Options) : Plugin {
 
       this.emitFile({
         type: 'asset',
-        fileName: manifestFile,
+        fileName: path.basename(manifestPath),
         source: content
       })
     },
