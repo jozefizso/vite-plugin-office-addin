@@ -31,7 +31,9 @@ export default defineConfig({
 })
 ```
 
-### Advanced Usage
+## Advanced Usage
+
+### Replacing development address
 
 To replace the development URL address in **manifest.xml** file to production address,
 you can use the plugin configuration option or `.env` files.
@@ -70,6 +72,24 @@ ADDIN_PROD_URL=https://office-addin.contoso.com
 
 When you run `vite build` the generated **manifest.xml** file will have
 production addresses.
+
+
+### Specify a custom path
+
+If your `manifest.xml` file is not in the project root, set the `path` property to point to the right location:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import officeAddin from 'vite-plugin-office-addin'
+
+export default defineConfig({
+  plugins: [officeAddin({
+    path: 'src/other-folder/manifest.xml'
+  })]
+})
+```
+
 
 ## License
 
