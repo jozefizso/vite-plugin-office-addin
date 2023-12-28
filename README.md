@@ -23,6 +23,7 @@ Use the plugin in your `vite.config.js` file:
 
 ```js
 // vite.config.js
+import { defineConfig } from 'vite'
 import officeAddin from 'vite-plugin-office-addin'
 
 export default defineConfig({
@@ -37,6 +38,7 @@ you can use the plugin configuration option or `.env` files.
 
 ```js
 // vite.config.js
+import { defineConfig } from 'vite'
 import officeAddin from 'vite-plugin-office-addin'
 
 export default defineConfig({
@@ -52,6 +54,7 @@ Use the `ADDIN_DEV_URL` and `ADDIN_PROD_URL` environment variables.
 
 ```js
 // vite.config.js + .env files
+import { defineConfig } from 'vite'
 import officeAddin from 'vite-plugin-office-addin'
 
 export default defineConfig({
