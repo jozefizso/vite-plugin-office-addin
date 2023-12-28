@@ -90,6 +90,23 @@ export default defineConfig({
 })
 ```
 
+### Copying multiple manifests
+
+To copy multiple manifests to your output folder, define `officeAddin` entry for each file:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import officeAddin from 'vite-plugin-office-addin'
+
+export default defineConfig({
+  plugins: [
+    officeAddin({ path: 'manifest.xml' }),
+    officeAddin({ path: 'manifest.staging.xml' }),
+  ]
+})
+```
+
 
 ## License
 
