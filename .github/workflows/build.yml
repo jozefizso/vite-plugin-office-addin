@@ -35,6 +35,6 @@ jobs:
     - name: artifact
       uses: actions/upload-artifact@v4
       with:
-        name: 'vite-plugin-office-addin'
+        name: 'vite-plugin-office-addin-node${{ matrix.node-version }}'
         path: '*.tgz'
         retention-days: 14
