@@ -1,6 +1,6 @@
 {
-  "name": "vite-plugin-office-addin",
-  "version": "1.0.0",
+  "name": "@aldiand/vite-plugin-office-addin",
+  "version": "1.0.2",
   "description": "Office Add-ins development using Vite.",
   "license": "MIT",
   "author": "Jozef Izso",
@@ -9,6 +9,7 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "engines": {
     "node": ">=14.0.0"
   },
