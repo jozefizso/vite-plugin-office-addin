@@ -1,6 +1,6 @@
 {
-  "name": "@aldiand/vite-plugin-office-addin",
-  "version": "1.0.2",
+  "name": "vite-plugin-office-addin",
+  "version": "1.0.0",
   "description": "Office Add-ins development using Vite.",
   "license": "MIT",
   "author": "Jozef Izso",
